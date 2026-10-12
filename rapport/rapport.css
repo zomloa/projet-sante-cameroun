@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap');
+:root { --teal: #0F766E; --ink: #0F2A37; --slate: #64748B; --line: #E6EDF0; --bg: #F4F8F9; }
+body { font-family: 'Inter', 'Segoe UI', sans-serif; color: var(--ink); background: var(--bg); line-height: 1.65; font-size: 15.5px; }
+.main-container { max-width: 1050px; background: #fff; padding: 2.2rem 3rem 3rem; margin: 1.5rem auto; border-radius: 16px; box-shadow: 0 6px 24px rgba(15,42,55,.07); }
+h1, h2, h3, .title { font-family: 'Poppins', sans-serif; color: var(--ink); }
+h1.title { color: var(--teal); font-size: 2rem; border-bottom: 4px solid var(--teal); padding-bottom: .5rem; margin-bottom: .2rem; }
+h3.subtitle, .author, .date { color: var(--slate); font-weight: 500; }
+h1 { font-size: 1.45rem; margin-top: 2.4rem; color: var(--teal); border-left: 5px solid var(--teal); padding-left: .7rem; }
+h2 { font-size: 1.15rem; margin-top: 1.6rem; }
+.resume { background: #EEF8F6; border: 1px solid #D0EDE8; border-left: 6px solid var(--teal); border-radius: 12px; padding: 1rem 1.4rem; margin: 1.2rem 0; }
+.resume h2 { margin-top: .2rem; color: var(--teal); }
+table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .88rem; }
+th { background: #EEF8F6; color: #0A4F49; text-align: left; padding: .5rem .6rem; border-bottom: 2px solid #CCEBE6; font-size: .8rem; text-transform: uppercase; letter-spacing: .3px; }
+td { padding: .45rem .6rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:hover td { background: #F7FBFA; }
+blockquote { background: #FEF0D2; border-left: 5px solid #F59E0B; border-radius: 8px; padding: .6rem 1rem; color: #92400E; font-size: .93rem; }
+img { border-radius: 10px; border: 1px solid var(--line); margin: .6rem 0; }
+caption { color: var(--slate); font-size: .85rem; padding: .3rem 0; caption-side: top; }
+#TOC { font-size: .88rem; }
+.list-group-item.active, .list-group-item.active:hover { background: var(--teal); border-color: var(--teal); }

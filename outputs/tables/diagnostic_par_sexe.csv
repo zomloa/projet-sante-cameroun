@@ -1,0 +1,19 @@
+gender,diagnosis,n,part
+Féminin,Anémie,544,0.11953416831465612
+Féminin,Diabète,477,0.10481212920237311
+Féminin,Diarrhée,512,0.11250274664908812
+Féminin,Hypertension,488,0.10722918039991211
+Féminin,Infection Respiratoire,501,0.11008569545154911
+Féminin,Malnutrition,523,0.11491979784662712
+Féminin,Paludisme,497,0.10920676774335311
+Féminin,Tuberculose,500,0.10986596352450011
+Féminin,Typhoïde,509,0.11184355086794111
+Masculin,Anémie,524,0.11725218169612889
+Masculin,Diabète,501,0.11210561646900873
+Masculin,Diarrhée,476,0.10651152383083463
+Masculin,Hypertension,474,0.10606399641978072
+Masculin,Infection Respiratoire,495,0.11076303423584695
+Masculin,Malnutrition,514,0.11501454464085925
+Masculin,Paludisme,503,0.11255314388006266
+Masculin,Tuberculose,490,0.10964421570821213
+Masculin,Typhoïde,492,0.11009174311926606

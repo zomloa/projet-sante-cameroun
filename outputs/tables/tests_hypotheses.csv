@@ -1,0 +1,13 @@
+test,methode,statistique,p_value,significatif_5pct
+rupture_region,Pearson's Chi-squared test,15.654730277308474,0.07445128229003065,FALSE
+rupture_district,Pearson's Chi-squared test,51.37512335835954,0.006394542332669186,TRUE
+rupture_diag,Pearson's Chi-squared test,4.505985647305974,0.8088339635230555,FALSE
+assurance_rupture,Pearson's Chi-squared test with Yates' continuity correction,0.6593265721049167,0.41679778934183564,FALSE
+diag_region,Pearson's Chi-squared test,87.69487814767542,0.1006191588936742,FALSE
+diag_age,Pearson's Chi-squared test,47.63621512740143,0.18989526798570458,FALSE
+diag_sexe,Pearson's Chi-squared test,2.273681247469977,0.9714509553766293,FALSE
+cout_diag,Kruskal-Wallis rank sum test,6073.489983612553,0,TRUE
+cout_assurance,Wilcoxon rank sum test with continuity correction,9088840.5,0.444186282882957,FALSE
+cout_type_cons,Kruskal-Wallis rank sum test,7.523793837498118,0.11066465046954112,FALSE
+cout_region,Kruskal-Wallis rank sum test,2.8291445753827222,0.9706851359276538,FALSE
+age_cout,Spearman's rank correlation rho,115931168943.32758,0.09624723389922153,FALSE

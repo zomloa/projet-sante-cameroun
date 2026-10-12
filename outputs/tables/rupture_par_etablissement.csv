@@ -1,0 +1,149 @@
+facility_name,district,taux_rupture,n
+Centre de Santé Urbain Ebolowa,Ebolowa,0.3275862068965517,58
+Centre Médical Intégré Batouri,Batouri,0.3188405797101449,69
+Clinique Communautaire Kumba,Kumba,0.3103448275862069,58
+Hôpital Régional Maroua,Maroua,0.29508196721311475,61
+District Hospital Yaoundé I,Yaoundé I,0.288135593220339,59
+Centre de Santé Urbain Yaoundé I,Yaoundé I,0.27419354838709675,62
+Centre de Santé Urbain Sangmélima,Sangmélima,0.2727272727272727,77
+Centre Médical Intégré Bamenda,Bamenda,0.2727272727272727,77
+Hôpital Régional Batouri,Batouri,0.2727272727272727,66
+District Hospital Guider,Guider,0.26785714285714285,56
+District Hospital Dschang,Dschang,0.26153846153846155,65
+Hôpital Régional Pitoa,Pitoa,0.25862068965517243,58
+Centre de Santé Urbain Yaoundé II,Yaoundé II,0.25757575757575757,66
+District Hospital Mbalmayo,Mbalmayo,0.25757575757575757,66
+District Hospital Mbouda,Mbouda,0.2542372881355932,59
+Clinique Communautaire Dschang,Dschang,0.25,64
+Hôpital Régional Mbalmayo,Mbalmayo,0.25,68
+Centre Médical Intégré Ebolowa,Ebolowa,0.24,75
+Clinique Communautaire Batouri,Batouri,0.23943661971830985,71
+Hôpital Régional Yaoundé I,Yaoundé I,0.2361111111111111,72
+Centre de Santé Urbain Garoua,Garoua,0.22857142857142856,70
+District Hospital Maroua,Maroua,0.22857142857142856,70
+Centre de Santé Urbain Nkongsamba,Nkongsamba,0.22727272727272727,66
+Centre Médical Intégré Pitoa,Pitoa,0.22580645161290322,62
+District Hospital Sangmélima,Sangmélima,0.22535211267605634,71
+Centre de Santé Urbain Bertoua,Bertoua,0.225,80
+Hôpital Régional Mokolo,Mokolo,0.2222222222222222,54
+Clinique Communautaire Guider,Guider,0.22058823529411764,68
+Centre Médical Intégré Mbalmayo,Mbalmayo,0.2191780821917808,73
+Centre Médical Intégré Meiganga,Meiganga,0.21621621621621623,74
+Hôpital Régional Ebolowa,Ebolowa,0.21518987341772153,79
+Hôpital Régional Garoua,Garoua,0.21428571428571427,56
+Hôpital Régional Tibati,Tibati,0.21428571428571427,84
+District Hospital Douala II,Douala II,0.21348314606741572,89
+Clinique Communautaire Bafoussam,Bafoussam,0.21311475409836064,61
+District Hospital Batouri,Batouri,0.21212121212121213,66
+District Hospital Buea,Buea,0.21212121212121213,66
+Hôpital Régional Buea,Buea,0.20967741935483872,62
+Hôpital Régional Douala I,Douala I,0.20967741935483872,62
+Centre Médical Intégré Mbouda,Mbouda,0.208955223880597,67
+Hôpital Régional Yokadouma,Yokadouma,0.20754716981132076,53
+Centre de Santé Urbain Bafoussam,Bafoussam,0.20689655172413793,58
+Centre Médical Intégré Sangmélima,Sangmélima,0.20634920634920634,63
+District Hospital Bafoussam,Bafoussam,0.20634920634920634,63
+Centre de Santé Urbain Limbe,Limbe,0.20588235294117646,68
+Centre Médical Intégré Douala I,Douala I,0.20588235294117646,68
+Hôpital Régional Ngaoundéré,Ngaoundéré,0.2054794520547945,73
+Centre Médical Intégré Garoua,Garoua,0.203125,64
+Centre Médical Intégré Ngaoundéré,Ngaoundéré,0.203125,64
+Hôpital Régional Sangmélima,Sangmélima,0.20270270270270271,74
+Clinique Communautaire Bertoua,Bertoua,0.2,75
+Clinique Communautaire Ebolowa,Ebolowa,0.2,65
+Clinique Communautaire Sangmélima,Sangmélima,0.2,60
+Clinique Communautaire Yaoundé II,Yaoundé II,0.2,70
+Clinique Communautaire Wum,Wum,0.19736842105263158,76
+Hôpital Régional Kumba,Kumba,0.19718309859154928,71
+Centre de Santé Urbain Batouri,Batouri,0.19696969696969696,66
+District Hospital Bamenda,Bamenda,0.19696969696969696,66
+Hôpital Régional Yaoundé II,Yaoundé II,0.19672131147540983,61
+Centre de Santé Urbain Maroua,Maroua,0.19642857142857142,56
+Centre de Santé Urbain Douala I,Douala I,0.19444444444444445,72
+Clinique Communautaire Ngaoundéré,Ngaoundéré,0.19402985074626866,67
+Hôpital Régional Meiganga,Meiganga,0.19298245614035087,57
+Centre de Santé Urbain Mokolo,Mokolo,0.19101123595505617,89
+Centre de Santé Urbain Dschang,Dschang,0.19047619047619047,63
+Centre Médical Intégré Yokadouma,Yokadouma,0.1896551724137931,58
+Centre Médical Intégré Kumba,Kumba,0.18571428571428572,70
+District Hospital Bertoua,Bertoua,0.18571428571428572,70
+Centre Médical Intégré Maroua,Maroua,0.18461538461538463,65
+Clinique Communautaire Buea,Buea,0.18181818181818182,66
+Centre de Santé Urbain Tibati,Tibati,0.1791044776119403,67
+Hôpital Régional Limbe,Limbe,0.17857142857142858,56
+Clinique Communautaire Mokolo,Mokolo,0.17647058823529413,85
+Clinique Communautaire Maroua,Maroua,0.17567567567567569,74
+District Hospital Ebolowa,Ebolowa,0.17567567567567569,74
+District Hospital Limbe,Limbe,0.1724137931034483,58
+Centre de Santé Urbain Yokadouma,Yokadouma,0.171875,64
+Centre Médical Intégré Kribi,Kribi,0.171875,64
+Centre Médical Intégré Wum,Wum,0.17073170731707318,82
+Hôpital Régional Kousseri,Kousseri,0.17073170731707318,82
+Centre de Santé Urbain Douala II,Douala II,0.1694915254237288,59
+Centre Médical Intégré Yaoundé I,Yaoundé I,0.1686746987951807,83
+Clinique Communautaire Yokadouma,Yokadouma,0.1686746987951807,83
+Centre de Santé Urbain Wum,Wum,0.16666666666666666,72
+Centre Médical Intégré Mokolo,Mokolo,0.16666666666666666,66
+Hôpital Régional Mbouda,Mbouda,0.16666666666666666,72
+Centre de Santé Urbain Mbalmayo,Mbalmayo,0.16455696202531644,79
+Clinique Communautaire Meiganga,Meiganga,0.1643835616438356,73
+District Hospital Tibati,Tibati,0.16363636363636364,55
+Clinique Communautaire Yaoundé I,Yaoundé I,0.16071428571428573,56
+Centre Médical Intégré Guider,Guider,0.16049382716049382,81
+District Hospital Wum,Wum,0.16,50
+Clinique Communautaire Kousseri,Kousseri,0.15873015873015872,63
+District Hospital Douala I,Douala I,0.15873015873015872,63
+District Hospital Pitoa,Pitoa,0.15873015873015872,63
+District Hospital Kribi,Kribi,0.1568627450980392,51
+Centre Médical Intégré Tibati,Tibati,0.15476190476190477,84
+District Hospital Ngaoundéré,Ngaoundéré,0.15384615384615385,65
+District Hospital Yokadouma,Yokadouma,0.15384615384615385,65
+District Hospital Meiganga,Meiganga,0.15294117647058825,85
+Centre de Santé Urbain Mbouda,Mbouda,0.15151515151515152,66
+Centre Médical Intégré Nkongsamba,Nkongsamba,0.15151515151515152,66
+Clinique Communautaire Mbouda,Mbouda,0.1509433962264151,53
+Centre de Santé Urbain Bamenda,Bamenda,0.15,60
+Clinique Communautaire Tibati,Tibati,0.15,80
+District Hospital Kousseri,Kousseri,0.14925373134328357,67
+Hôpital Régional Bertoua,Bertoua,0.14814814814814814,54
+Centre de Santé Urbain Kousseri,Kousseri,0.14754098360655737,61
+Centre Médical Intégré Kousseri,Kousseri,0.14705882352941177,68
+Hôpital Régional Dschang,Dschang,0.14666666666666667,75
+District Hospital Kumbo,Kumbo,0.14545454545454545,55
+Centre de Santé Urbain Guider,Guider,0.14516129032258066,62
+Clinique Communautaire Douala I,Douala I,0.14473684210526316,76
+Centre Médical Intégré Bafoussam,Bafoussam,0.14457831325301204,83
+Centre Médical Intégré Dschang,Dschang,0.14285714285714285,77
+Hôpital Régional Bafoussam,Bafoussam,0.14285714285714285,70
+District Hospital Garoua,Garoua,0.14084507042253522,71
+Centre de Santé Urbain Kribi,Kribi,0.14035087719298245,57
+Centre Médical Intégré Limbe,Limbe,0.13793103448275862,58
+Clinique Communautaire Garoua,Garoua,0.136986301369863,73
+Centre de Santé Urbain Pitoa,Pitoa,0.13559322033898305,59
+Hôpital Régional Douala II,Douala II,0.13432835820895522,67
+Hôpital Régional Guider,Guider,0.13114754098360656,61
+Clinique Communautaire Douala II,Douala II,0.13095238095238096,84
+Hôpital Régional Kumbo,Kumbo,0.12698412698412698,63
+Centre de Santé Urbain Meiganga,Meiganga,0.125,72
+Clinique Communautaire Kumbo,Kumbo,0.12121212121212122,66
+Clinique Communautaire Limbe,Limbe,0.12048192771084337,83
+District Hospital Nkongsamba,Nkongsamba,0.11864406779661017,59
+Centre de Santé Urbain Ngaoundéré,Ngaoundéré,0.11764705882352941,68
+Centre Médical Intégré Buea,Buea,0.11475409836065574,61
+Hôpital Régional Kribi,Kribi,0.11475409836065574,61
+Hôpital Régional Nkongsamba,Nkongsamba,0.11475409836065574,61
+Centre Médical Intégré Douala II,Douala II,0.11320754716981132,53
+Centre de Santé Urbain Kumbo,Kumbo,0.1111111111111111,72
+Centre Médical Intégré Bertoua,Bertoua,0.109375,64
+Clinique Communautaire Nkongsamba,Nkongsamba,0.1044776119402985,67
+Hôpital Régional Bamenda,Bamenda,0.1044776119402985,67
+Centre Médical Intégré Yaoundé II,Yaoundé II,0.09836065573770492,61
+Centre de Santé Urbain Buea,Buea,0.09375,64
+District Hospital Yaoundé II,Yaoundé II,0.09259259259259259,54
+Clinique Communautaire Kribi,Kribi,0.09090909090909091,77
+Centre Médical Intégré Kumbo,Kumbo,0.08695652173913043,69
+District Hospital Mokolo,Mokolo,0.08695652173913043,69
+Hôpital Régional Wum,Wum,0.08064516129032258,62
+Clinique Communautaire Pitoa,Pitoa,0.08,50
+Clinique Communautaire Mbalmayo,Mbalmayo,0.07936507936507936,63
+Centre de Santé Urbain Kumba,Kumba,0.06451612903225806,62

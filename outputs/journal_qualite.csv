@@ -1,0 +1,13 @@
+probleme,traitement,lignes_concernees
+Doublons (patient_id répétés),Suppression après harmonisation,300
+"Régions incohérentes (LITTORAL, litoral, SW, sud ouest, Ctr, CENTER, centre)",Harmonisées en 10 régions officielles,231
+Régions manquantes,Imputées à partir du district (référentiel),518
+Dates au format jj/mm/aaaa,Converties en date ISO,200
+"Genre : modalités mixtes (M, F, male, Feminin...)",Harmonisé : Féminin / Masculin,978
+Genre manquant,Laissé NA (non imputable),512
+Diagnostic manquant,"Laissé NA, exclu des analyses épidémiologiques",800
+Assurance manquante,Laissée NA,520
+Coût manquant,Laissé NA (exclu des moyennes),516
+"Coûts aberrants (<=0 ou >1000 : -100, 9999, 50000)",Mis à NA,50
+"Âges impossibles (<0 ou >120 : -5, 140, 222)",Mis à NA,50
+"Âge = 0 (pic artificiel, valeur par défaut probable)",Mis à NA,537

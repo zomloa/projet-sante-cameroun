@@ -1,0 +1,192 @@
+---
+title: "Analyse des consultations de santé — Cameroun 2025"
+subtitle: "De la donnée brute au dashboard : constats et recommandations"
+author: "Analyste junior · Programme de santé publique"
+date: "`r format(Sys.Date(), '%d/%m/%Y')`"
+output:
+  html_document:
+    theme: bootstrap
+    highlight: null
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    self_contained: true
+    css: rapport.css
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, out.width = "100%", fig.align = "center")
+library(tidyverse); library(knitr); library(scales)
+racine <- normalizePath("..")
+res <- readRDS(file.path(racine, "outputs", "resultats.rds"))
+df  <- readRDS(file.path(racine, "data", "consultations_clean.rds"))
+journal <- read_csv(file.path(racine, "outputs", "journal_qualite.csv"), show_col_types = FALSE)
+fig <- function(nom) file.path(racine, "outputs", "figures", paste0(nom, ".png"))
+n   <- function(x, d = 0) format(round(x, d), big.mark = " ", decimal.mark = ",", nsmall = d)
+p   <- function(x, d = 1) paste0(format(round(100 * x, d), decimal.mark = ","), " %")
+pv  <- function(x) ifelse(x < 0.001, "< 0,001", format(round(x, 3), decimal.mark = ","))
+k   <- res$kpi
+t   <- res$tests_resume %>% mutate(test = as.character(test)) %>% column_to_rownames("test")
+```
+
+<div class="resume">
+
+## Synthèse pour la décision
+
+**`r n(k$consultations)` consultations** ont été analysées dans **`r k$nb_etablissements` établissements**, `r k$nb_districts` districts et `r k$nb_regions` régions du Cameroun (année 2025), après correction de `r nrow(journal)` types d'anomalies dans les données.
+
+1. **Les ruptures de médicaments touchent `r p(k$taux_rupture)` des consultations**, dans toutes les régions. L'écart entre **districts** est statistiquement significatif (p = `r pv(t["rupture_district","p_value"])`), pas celui entre régions : l'action doit être ciblée au niveau district et établissement (Batouri `r p(res$rupture_district$taux_rupture[1])`, Ebolowa, Sangmélima, Yaoundé I, Maroua).
+2. **Le coût dépend du diagnostic, et de lui seul** (p `r pv(t["cout_diag","p_value"])`) : le diabète (`r n(res$cout_diag$moyenne[1], 1)` USD) et la tuberculose (`r n(res$cout_diag$moyenne[2], 1)` USD) coûtent 3 à 4 fois plus que la diarrhée (`r n(tail(res$cout_diag$moyenne, 1), 1)` USD).
+3. **L'assurance ne change pas le coût observé** (p = `r pv(t["cout_assurance","p_value"])`) et ne couvre que **`r p(k$taux_assures)`** des patients, de façon homogène entre régions.
+4. **Aucune pathologie ne domine** : les 9 diagnostics pèsent chacun environ 11 % des cas. Les « points chauds » régionaux visibles sur la carte thermique ne sont **pas** statistiquement significatifs (p = `r pv(t["diag_region","p_value"])`) : à confirmer avec davantage de données avant d'orienter des moyens.
+5. **L'activité est stable toute l'année** (pas de saisonnalité détectable, p = `r pv(res$test_uniform_mois$p.value)`).
+
+</div>
+
+# 1. Contexte et méthode
+
+Le ministère de la santé collecte des consultations dans plusieurs centres. Le fichier source (`r n(k$consultations + journal$lignes_concernees[1])` lignes, 12 variables) est volontairement « sale ». La démarche suit le workflow standard d'un analyste :
+
+| Étape | Livrable |
+|---|---|
+| 1. Import · 2. Exploration · 3. Nettoyage · 4. Transformation | `R/01_import_nettoyage.R` |
+| 5. Analyse métier · 6. Visualisation · 7. Statistiques | `R/02_analyse.R` |
+| 8. Dashboard interactif | `app/app.R` (Shiny) |
+| 9. Reporting · 10. Recommandations | ce document |
+
+Tout est reproductible : `Rscript run_all.R` régénère les données propres, les figures et ce rapport.
+
+# 2. Qualité des données : de la donnée sale à la donnée fiable
+
+```{r journal}
+journal %>% transmute(Problème = probleme, Traitement = traitement, `Lignes concernées` = lignes_concernees) %>%
+  kable(format.args = list(big.mark = " "), align = "llr")
+```
+
+**Décisions de méthode à connaître**
+
+- **Région manquante (518 lignes)** : récupérée à 100 % grâce au district, qui détermine la région sans ambiguïté dans les données.
+- **Âge = 0 (537 lignes)** : on observe 537 âges à 0 contre 67 à 1 an. Ce pic est artificiel (valeur par défaut de saisie probable, y compris pour des consultations prénatales) : traité comme manquant.
+- **Coûts −100, 9 999 et 50 000** : codes d'erreur évidents (médiane à 16 USD), mis à manquant. Le coût de 2,0 USD, répété 215 fois, ressemble à un plancher de saisie mais reste plausible : conservé.
+- **Doublons** : 300 `patient_id` répétés. Après harmonisation du genre, 296 sont identiques ; 4 diffèrent légèrement, la première occurrence est conservée.
+- **Valeurs manquantes restantes** (≈ 5 % par variable) : jamais imputées par la moyenne, pour ne pas fabriquer d'information.
+- **Devise** : non précisée dans la source ; interprétée comme des **USD**. Hypothèse à faire valider.
+
+```{r incoh}
+res$incoherences %>% transmute(`Incohérence logique résiduelle (signalée, non corrigée)` = controle, Lignes = lignes) %>% kable(format.args = list(big.mark = " "))
+```
+
+# 3. Résultats
+
+## 3.1 Où se concentre l'activité ?
+
+L'activité est répartie de façon quasi uniforme : de `r n(min(res$par_region$consultations))` (`r res$par_region$region[which.min(res$par_region$consultations)]`) à `r n(max(res$par_region$consultations))` consultations (`r res$par_region$region[1]`) par région.
+
+```{r f1}
+include_graphics(fig("01_consultations_region"))
+```
+
+## 3.2 Quelles maladies ? Où ? Chez qui ?
+
+`r as.character(res$diag$diagnosis[1])` est le diagnostic le plus fréquent (`r p(res$diag$part[1])`), mais l'écart avec le dernier (`r as.character(tail(res$diag$diagnosis, 1))`, `r p(tail(res$diag$part, 1))`) est faible.
+
+```{r f2}
+include_graphics(fig("02_diagnostics"))
+```
+
+```{r f3}
+include_graphics(fig("03_diagnostic_region_heatmap"))
+```
+
+> **Lecture prudente.** Test du χ² : diagnostic × région p = `r pv(t["diag_region","p_value"])`, diagnostic × tranche d'âge p = `r pv(t["diag_age","p_value"])`, diagnostic × sexe p = `r pv(t["diag_sexe","p_value"])`. Les différences visibles sur la carte thermique sont compatibles avec le hasard : **pas de profil épidémiologique régional établi** avec ces données.
+
+## 3.3 Combien coûtent les soins ?
+
+```{r f4}
+include_graphics(fig("04_cout_par_diagnostic"))
+```
+
+```{r t4}
+res$cout_diag %>% transmute(Diagnostic = as.character(diagnosis), Consultations = n, `Coût moyen` = round(moyenne, 1), `Coût médian` = round(mediane, 1),
+                            `Coût total (USD)` = round(cout_total), `Part du coût total` = p(cout_total / sum(cout_total))) %>%
+  kable(format.args = list(big.mark = " ", decimal.mark = ","), align = "lrrrrr")
+```
+
+Diabète et tuberculose représentent `r p(sum(res$cout_diag$cout_total[1:2]) / sum(res$cout_diag$cout_total), 0)` du coût total pour `r p(sum(res$cout_diag$n[1:2]) / sum(res$cout_diag$n), 0)` des cas : ce sont les pathologies qui pèsent le plus sur le budget.
+
+## 3.4 Assurance
+
+```{r f5}
+include_graphics(fig("05_assurance_region"))
+```
+
+Le coût moyen est quasi identique pour les assurés (`r n(res$cout_assur$moyenne[1], 2)` USD) et les non-assurés (`r n(res$cout_assur$moyenne[2], 2)` USD). La couverture varie peu d'une région à l'autre (de `r p(min(res$assur_region$taux_assures))` à `r p(max(res$assur_region$taux_assures))`).
+
+## 3.5 Disponibilité des médicaments
+
+```{r f6}
+include_graphics(fig("06_rupture_region"))
+```
+
+```{r t6}
+res$rupture_district %>% slice_head(n = 8) %>% transmute(District = as.character(district), Région = as.character(region), Consultations = n, `Taux de rupture` = p(taux_rupture)) %>%
+  kable(caption = "Les 8 districts les plus touchés", align = "llrr")
+```
+
+Le taux de rupture ne dépend ni du diagnostic (p = `r pv(t["rupture_diag","p_value"])`) ni du statut d'assurance (p = `r pv(t["assurance_rupture","p_value"])`) : c'est un problème d'**approvisionnement par site**, pas de type de patient. Il est maximal en janvier (`r p(res$mensuel$taux_rupture[1])`) et en novembre (`r p(res$mensuel$taux_rupture[11])`).
+
+## 3.6 Dynamique mensuelle
+
+```{r f7}
+include_graphics(fig("07_evolution_mensuelle"))
+```
+
+# 4. Statistiques descriptives
+
+```{r desc}
+res$desc %>% transmute(Variable = variable, n, Moyenne = moyenne, Médiane = mediane, `Écart-type` = ecart_type, Variance = variance,
+                       Min = min, Q1 = q1, Q3 = q3, Max = max, CV = cv, Asymétrie = asymetrie) %>%
+  mutate(across(where(is.numeric), ~ round(.x, 2))) %>% kable(format.args = list(decimal.mark = ",", big.mark = " "))
+```
+
+L'âge (moyenne `r n(res$desc$moyenne[1], 1)` ans, médiane `r n(res$desc$mediane[1])`) et le coût (moyenne `r n(res$desc$moyenne[2], 1)`, médiane `r n(res$desc$mediane[2], 1)` USD) ont des distributions peu asymétriques et proches d'une cloche, une fois les valeurs aberrantes retirées. Avant nettoyage, la moyenne du coût était de **109 USD** à cause de quelques valeurs à 9 999 et 50 000 : un exemple concret de l'intérêt du nettoyage.
+
+```{r f8, fig.show='hold', out.width="49%"}
+include_graphics(c(fig("08_distribution_age"), fig("09_distribution_cout")))
+```
+
+## Tests d'hypothèses (seuil 5 %)
+
+```{r tests}
+libelles <- c(rupture_region = "Rupture × région", rupture_district = "Rupture × district", rupture_diag = "Rupture × diagnostic",
+              assurance_rupture = "Rupture × assurance", diag_region = "Diagnostic × région", diag_age = "Diagnostic × tranche d'âge",
+              diag_sexe = "Diagnostic × sexe", cout_diag = "Coût × diagnostic", cout_assurance = "Coût × assurance",
+              cout_type_cons = "Coût × type de consultation", cout_region = "Coût × région", age_cout = "Âge × coût (corrélation)")
+res$tests_resume %>% transmute(Comparaison = libelles[test], Test = sub(" with.*| rank sum test", "", methode), `p-value` = pv(p_value),
+                               Conclusion = ifelse(significatif_5pct, "**Significatif**", "Non significatif")) %>% kable(align = "lllc")
+```
+
+Seuls **deux** effets sont solides : le coût varie avec le diagnostic, et le taux de rupture varie entre districts.
+
+# 5. Recommandations
+
+| # | Constat | Recommandation | Indicateur de suivi |
+|---|---|---|---|
+| 1 | Ruptures de stock à `r p(k$taux_rupture)`, concentrées sur certains districts (jusqu'à `r p(res$rupture_district$taux_rupture[1])` à `r res$rupture_district$district[1]`) | **Audit logistique prioritaire** des 5 districts les plus touchés et de leurs établissements (ex. Centre de Santé Urbain Ebolowa, `r p(res$rupture_etab$taux_rupture[1], 0)`) ; réapprovisionnement ciblé plutôt que régional | Taux de rupture par district, objectif < 10 % |
+| 2 | Pics de rupture en janvier et novembre | Constituer des **stocks tampons avant** ces mois (commandes anticipées en décembre et octobre) | Taux mensuel de rupture |
+| 3 | Diabète et tuberculose = `r p(sum(res$cout_diag$cout_total[1:2]) / sum(res$cout_diag$cout_total), 0)` du coût | Prioriser ces pathologies dans les **financements et achats groupés** (négociation de prix, dépistage précoce) | Coût moyen par cas, observance |
+| 4 | Assurance à `r p(k$taux_assures)` sans effet visible sur le coût | **Étendre la couverture** en commençant par les maladies chroniques coûteuses ; vérifier que l'assurance prend bien en charge le reste à charge | Taux d'assurés, coût payé par le patient |
+| 5 | Aucune pathologie dominante, aucun profil régional établi | Maintenir une offre **généraliste** dans toutes les régions ; **ne pas** réallouer des ressources sur la base de la carte thermique actuelle avant 2 à 3 ans de données | Reprise du test diagnostic × région |
+| 6 | Activité stable toute l'année | Dimensionner les équipes sur un **rythme constant**, sans pic saisonnier | Consultations mensuelles |
+| 7 | `r n(res$incoherences$lignes[1])` consultations prénatales de patients masculins ; 5 % de valeurs manquantes par champ ; formats de dates et régions hétérogènes | **Fiabiliser la collecte** : listes déroulantes (région, sexe, diagnostic), date au format unique, champs obligatoires, contrôles de cohérence (âge 1-120, coût > 0, prénatal ↔ femme), identifiant patient unique | Taux de complétude > 98 %, 0 doublon |
+
+## Limites
+
+- Données **simulées** : les faibles écarts entre régions reflètent probablement ce caractère synthétique ; l'analyse reste valable comme démarche.
+- Devise du coût à confirmer ; âge 0 traité comme manquant (vrais nourrissons possibles, mais le pic observé est trop marqué pour être naturel).
+- Les seuils de significativité sont indicatifs ; une comparaison de nombreux sous-groupes augmente le risque de faux positifs.
+
+# 6. Dashboard
+
+Le tableau de bord interactif (`shiny::runApp("app")`) reprend ces analyses avec des filtres combinables (période, région, diagnostic, type de consultation, sexe, assurance) : vue d'ensemble, épidémiologie, carte des districts, médicaments, coûts et assurance, qualité des données, export CSV.
